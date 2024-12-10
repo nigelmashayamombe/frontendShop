@@ -1,4 +1,6 @@
-import { Github } from 'lucide-react';
+'use client';
+
+import { Facebook, Twitter, Globe } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -71,13 +73,35 @@ export default function Footer() {
             <ul className="mt-4 space-y-2">
               <li>
                 <a
-                  href="https://github.com"
+                  href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
                 >
-                  <Github className="h-5 w-5" />
-                  <span>GitHub</span>
+                  <Facebook className="h-5 w-5" />
+                  <span>Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
+                >
+                  <Twitter className="h-5 w-5" />
+                  <span>Twitter</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://acctbazaar.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
+                >
+                  <Globe className="h-5 w-5" />
+                  <span>Website</span>
                 </a>
               </li>
             </ul>
@@ -85,7 +109,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} ShrapnelTech. All rights reserved.
+            © {new Date().getFullYear()} Acctbazaar. All rights reserved.
           </p>
         </div>
       </div>

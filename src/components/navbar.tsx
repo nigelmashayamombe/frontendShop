@@ -6,11 +6,14 @@ import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 import { NotificationDropdown } from '@/components/notification-dropdown';
 import { ProfileDropdown } from '@/components/profile-dropdown';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X, Heart, ShoppingCart } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated] = useState(false); // Replace with actual auth state
+  const [isAuthenticated] = useState(false);
+  const cartCount = 0;
+  const wishlistCount = 0;
 
   return (
     <nav className="border-b">
@@ -23,8 +26,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4">
+          <div className="hidden md:flex flex-1 justify-center">
+            <div className="flex items-center space-x-8">
               <Link href="/marketplace" className="hover:text-primary">
                 Marketplace
               </Link>
@@ -34,21 +37,39 @@ export default function Navbar() {
               <Link href="/sell" className="hover:text-primary">
                 Sell
               </Link>
-              <ModeToggle />
-              <NotificationDropdown />
-              {isAuthenticated ? (
-                <ProfileDropdown />
-              ) : (
-                <>
-                  <Button variant="outline" asChild>
-                    <Link href="/auth/signin">Sign In</Link>
-                  </Button>
-                  <Button asChild>
-                    <Link href="/auth/signup">Sign Up</Link>
-                  </Button>
-                </>
-              )}
             </div>
+          </div>
+
+          <div className="hidden md:flex items-center space-x-2">
+            <Link href="/wishlist">
+              <Button variant="ghost" size="icon" className="relative">
+                <Heart className="h-5 w-5" />
+                {wishlistCount > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
+                    {wishlistCount}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+            <Link href="/cart">
+              <Button variant="ghost" size="icon" className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                {cartCount > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
+                    {cartCount}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+            <ModeToggle />
+            <NotificationDropdown />
+            <ProfileDropdown isAuthenticated={isAuthenticated} />
           </div>
 
           <div className="md:hidden">
@@ -84,23 +105,21 @@ export default function Navbar() {
             >
               Sell
             </Link>
-            <div className="px-3 py-2">
+            <div className="flex items-center space-x-2 px-3 py-2">
+              <Link href="/wishlist">
+                <Button variant="ghost" size="icon">
+                  <Heart className="h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/cart">
+                <Button variant="ghost" size="icon">
+                  <ShoppingCart className="h-5 w-5" />
+                </Button>
+              </Link>
               <ModeToggle />
+              <NotificationDropdown />
+              <ProfileDropdown isAuthenticated={isAuthenticated} />
             </div>
-            {isAuthenticated ? (
-              <div className="px-3 py-2">
-                <ProfileDropdown />
-              </div>
-            ) : (
-              <div className="px-3 py-2 space-y-2">
-                <Button className="w-full" variant="outline" asChild>
-                  <Link href="/auth/signin">Sign In</Link>
-                </Button>
-                <Button className="w-full" asChild>
-                  <Link href="/auth/signup">Sign Up</Link>
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       )}
